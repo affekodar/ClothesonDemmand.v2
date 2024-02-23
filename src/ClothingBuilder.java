@@ -1,8 +1,7 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class ClothingBuilder {
+public abstract class ClothingBuilder extends Menu{
 
    private final static Scanner scanner = new Scanner(System.in);
    private final static String materialMenuPrompt = "\nMaterial\n\nChoose Material\n" +
@@ -19,14 +18,14 @@ public abstract class ClothingBuilder {
            "Enter choice:";
    private final static String confirmOrderPrompt =
            "1. Add item to cart and continue shopping\n" +
-           "2. Show cart\n" +
+           "2. Add item and show cart\n" +
            "3. Add item and place order\n";
 
 
-   public void orderToString(List<Clothing> order) {
+   public void orderToString(List<Object> order) {
       System.out.println("Shopping Cart");
       System.out.println("Items: " + order.size());
-      for (Clothing item : order) {
+      for (Object item : order) {
          System.out.println(item.toString());
       }
    }
@@ -71,19 +70,27 @@ public abstract class ClothingBuilder {
       }
    }
 
-   public void confirmItem(Clothing item, OrderManager orderManager) {
+   public void confirmItem(Clothing item, List<Object> order) {
       System.out.println(confirmOrderPrompt);
       int choice = scanner.nextInt();
 
       switch (choice) {
          case 1 -> {
-            orderManager.addToOrder(item);
-            orderToString(orderManager.getOrder());
+            order.add(item);
          }
-
-         case 2 -> orderToString(orderManager.getOrder());
-//         case 3 -> // TODO Notify CEO
+         case 2 -> {
+            order.add(item);
+            orderToString(order);
+         }
+         case 3 -> {
+            order.add(item);
+            setRunning(false);
+         }
       }
+   }
+
+   private void placeOrder(List<Object> order) {
+
    }
 
    public abstract ClothingBuilder addMaterial(String material);
@@ -93,7 +100,7 @@ public abstract class ClothingBuilder {
    public abstract ClothingBuilder addSize(String size);
    public abstract ClothingBuilder addPrice(double price);
    public abstract Clothing build();
-   public abstract void buildClothing(OrderManager order);
+   public abstract void buildClothing(List<Object> order);
 
 
 }

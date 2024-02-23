@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Objects;
+
 public class TShirtBuilder extends ClothingBuilder{
     private TShirt tShirt = new TShirt();
 
@@ -43,7 +46,7 @@ public class TShirtBuilder extends ClothingBuilder{
     }
 
     @Override
-    public void buildClothing(OrderManager orderManager) {
+    public void buildClothing(List<Object> order) {
         TShirt tShirt;
         TShirtBuilder tShirtBuilder = new TShirtBuilder();
         tShirt = tShirtBuilder.addId().build();
@@ -51,7 +54,7 @@ public class TShirtBuilder extends ClothingBuilder{
         chooseMaterial(tShirt, tShirtBuilder);
         chooseColor(tShirt, tShirtBuilder);
         chooseSize(tShirt, tShirtBuilder);
-        confirmItem(tShirt, orderManager);
+        confirmItem(tShirt, order);
 
     }
 

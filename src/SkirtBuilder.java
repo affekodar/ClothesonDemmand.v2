@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class SkirtBuilder extends ClothingBuilder{
     private Skirt skirt = new Skirt();
 
@@ -43,7 +45,7 @@ public class SkirtBuilder extends ClothingBuilder{
     }
 
     @Override
-    public void buildClothing(OrderManager orderManager) {
+    public void buildClothing(List<Object> order) {
         Skirt skirt;
         SkirtBuilder skirtBuilder = new SkirtBuilder();
         skirt = skirtBuilder.addId().build();
@@ -51,7 +53,7 @@ public class SkirtBuilder extends ClothingBuilder{
         chooseMaterial(skirt, skirtBuilder);
         chooseColor(skirt, skirtBuilder);
         chooseSize(skirt, skirtBuilder);
-        confirmItem(skirt, orderManager);
+        confirmItem(skirt, order);
 
     }
 }
