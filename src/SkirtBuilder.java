@@ -1,8 +1,7 @@
-import java.util.List;
 import java.util.Scanner;
 
-public class SkirtBuilder extends ClothingBuilder{
-    private Skirt skirt = new Skirt();
+public class SkirtBuilder extends ClothingBuilder {
+    private final Skirt skirt = new Skirt();
     Scanner scanner = new Scanner(System.in);
     private final static String patternPrompt = "Choose Pattern\n\n" +
             "1. Short\n" +
@@ -10,9 +9,9 @@ public class SkirtBuilder extends ClothingBuilder{
             "3. Long\n\n" +
             "Enter choice: ";
     private final static String waistlinePrompt = "Choose Waistline\n\n" +
-            "1. 80\n" +
-            "2. 100\n" +
-            "3. 120\n\n" +
+            "1. 80 cm\n" +
+            "2. 100 cm\n" +
+            "3. 120 cm\n\n" +
             "Enter choice: ";
 
     @Override
@@ -62,10 +61,12 @@ public class SkirtBuilder extends ClothingBuilder{
         skirt = (Skirt) skirtBuilder.addId().build();
         process(skirt, skirtBuilder, orderManager);
     }
+
     public SkirtBuilder addWaistline(double waistline) {
         skirt.setWaistline(waistline);
         return this;
     }
+
     public SkirtBuilder addPattern(String pattern) {
         skirt.setPattern(pattern);
         return this;
@@ -80,8 +81,8 @@ public class SkirtBuilder extends ClothingBuilder{
             chooseSize(item, builder);
             chooseWaistline(item, builder);
             choosePattern(item, builder);
-            placeOrder(item, orderManager);
             item.setPrice(80);
+            placeOrder(item, orderManager);
         }
         return item;
     }

@@ -1,8 +1,7 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private static final PantsBuilder pantsBuilder = new PantsBuilder();
     private static final SkirtBuilder skirtBuilder = new SkirtBuilder();
     private static final TShirtBuilder tShirtBuilder = new TShirtBuilder();
@@ -12,14 +11,6 @@ public class Menu {
     private final Customer customer = new Customer();
 
     private boolean running = true;
-
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
 
     private static final String mainMenuPrompt = "\nMain Menu\n\n" +
             "Which item would you like to customize?\n\n" +
@@ -41,15 +32,9 @@ public class Menu {
             System.out.println(mainMenuPrompt);
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> {
-                    pantsBuilder.buildClothing(orderManager, pantsBuilder);
-                }
-                case 2 -> {
-                    skirtBuilder.buildClothing(orderManager, skirtBuilder);
-                }
-                case 3 -> {
-                    tShirtBuilder.buildClothing(orderManager, tShirtBuilder);
-                }
+                case 1 -> pantsBuilder.buildClothing(orderManager, pantsBuilder);
+                case 2 -> skirtBuilder.buildClothing(orderManager, skirtBuilder);
+                case 3 -> tShirtBuilder.buildClothing(orderManager, tShirtBuilder);
                 case 4 -> running = false;
                 default -> System.out.println("Ogiltigt val. Försök igen.");
             }

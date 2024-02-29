@@ -1,15 +1,14 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class TShirtBuilder extends ClothingBuilder {
     private final TShirt tShirt = new TShirt();
     Scanner scanner = new Scanner(System.in);
-    private final static String neckPrompt = "Choose Pattern\n\n" +
+    private final static String neckPrompt = "Choose Neck\n\n" +
             "1. 30 cm\n" +
             "2. 40 cm\n" +
             "3. 50 cm \n\n" +
             "Enter choice: ";
-    private final static String sleevesPrompt = "Choose Waistline\n\n" +
+    private final static String sleevesPrompt = "Choose Sleeves\n\n" +
             "1. 20 cm\n" +
             "2. 30 cm\n" +
             "3. 40 cm\n\n" +
@@ -81,8 +80,8 @@ public class TShirtBuilder extends ClothingBuilder {
             chooseSize(item, builder);
             chooseNeck(item, builder);
             chooseSleeves(item, builder);
-            placeOrder(item, orderManager);
             item.setPrice(50);
+            placeOrder(item, orderManager);
         }
         return item;
     }

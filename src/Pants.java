@@ -35,12 +35,6 @@ public class Pants extends Clothing {
 
     @Override
     public String toString() {
-        return "pants_" +
-                "id: " + getId() +
-                ", material: " + getMaterial() +
-                ", color: " + getColor() +
-                ", size: " + getSize() +
-                ", fit " + getFit() +
-                ", length " + getLength();
+        return "pants_" + "id: " + getId() + ", material: " + getMaterial() + ", color: " + getColor() + ", size: " + getSize() + ", fit " + getFit() + ", length " + getLength();
     }
 }

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingCommand{
+public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingCommand {
     private final Pants pants = new Pants();
     Scanner scanner = new Scanner(System.in);
     private final static String fitPrompt = "Choose Fit\n\n" +
@@ -19,6 +19,7 @@ public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingC
         pants.setFit(fit);
         return this;
     }
+
     public PantsBuilder addLength(double length) {
         pants.setLength(length);
         return this;
@@ -73,7 +74,6 @@ public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingC
     }
 
 
-
     @Override
     public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
         if (builder instanceof PantsBuilder) {
@@ -82,8 +82,8 @@ public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingC
             chooseSize(item, builder);
             chooseFit(item, builder);
             chooseLength(item, builder);
-            placeOrder(item, orderManager);
             item.setPrice(100);
+            placeOrder(item, orderManager);
         }
         return item;
     }

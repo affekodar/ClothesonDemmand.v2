@@ -7,9 +7,6 @@ public class OrderManager {
     private final List<Object> order;
 
 
-
-
-
     private OrderManager() {
         observers = new ArrayList<>();
         order = new ArrayList<>();
@@ -21,33 +18,40 @@ public class OrderManager {
         }
         return instance;
     }
+
     public void addOrder(Object item) {
         order.add(item);
+        System.out.println("Thanks for ordering, your order is being handled! You will get an email when order is processed with your receipt.\n");
         notifyCEOPlacedOrder();
     }
+
     public void addItemToOrder(Object item) {
         order.add(item);
     }
-    public void simulateOrderFinished(){
+
+    public void simulateOrderFinished() {
         notifyCEOFinishedOrder();
         printReceipt();
+        System.exit(0);
     }
 
     public void addObserver(OrderObserver observer) {
         observers.add(observer);
     }
+
     public void removeObserver(OrderObserver observer) {
         observers.remove(observer);
     }
 
     private void notifyCEOPlacedOrder() {
-        simulateOrderFinished();
+
         for (OrderObserver observer : observers) {
             observer.orderAdded(order);
         }
+        simulateOrderFinished();
         System.out.println();
-
     }
+
     private void notifyCEOFinishedOrder() {
         System.out.println();
         for (OrderObserver observer : observers) {
@@ -56,12 +60,12 @@ public class OrderManager {
         System.out.println();
     }
 
-    public void printReceipt(){
+    public void printReceipt() {
         System.out.println("============== RECEIPT ==============");
         if (order.get(0) instanceof Customer) {
             System.out.println("customer_id: " + ((Customer) order.get(0)).getId() + " Name:" + ((Customer) order.get(0)).getName());
         }
-        System.out.println("Items " + (order.size()) + "\t\t\tPrice");
+        System.out.println("Items " + (order.size() - 1) + "\t\t\tPrice");
         System.out.println("-------------------------------------");
         double total = 0;
         for (int i = 1; i < order.size(); i++) {
@@ -78,6 +82,8 @@ public class OrderManager {
         System.out.println("-------------------------------------");
         System.out.printf("TOTAL\t\t\t$%.2f\n", total);
         System.out.println("=====================================");
+        System.out.println();
+        System.out.println();
     }
 
     public List<Object> getOrder() {
