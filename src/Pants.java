@@ -39,6 +39,8 @@ public class Pants extends Clothing {
                 "id: " + getId() +
                 ", material: " + getMaterial() +
                 ", color: " + getColor() +
-                ", size: " + getSize();
+                ", size: " + getSize() +
+                ", fit " + getFit() +
+                ", length " + getLength();
     }
 }

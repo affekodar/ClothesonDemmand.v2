@@ -1,7 +1,19 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class SkirtBuilder extends ClothingBuilder{
     private Skirt skirt = new Skirt();
+    Scanner scanner = new Scanner(System.in);
+    private final static String patternPrompt = "Choose Pattern\n\n" +
+            "1. Short\n" +
+            "2. Standard\n" +
+            "3. Long\n\n" +
+            "Enter choice: ";
+    private final static String waistlinePrompt = "Choose Waistline\n\n" +
+            "1. 80\n" +
+            "2. 100\n" +
+            "3. 120\n\n" +
+            "Enter choice: ";
 
     @Override
     public SkirtBuilder addMaterial(String material) {
@@ -45,15 +57,52 @@ public class SkirtBuilder extends ClothingBuilder{
     }
 
     @Override
-    public void buildClothing(List<Object> order) {
+    public void buildClothing(OrderManager orderManager, ClothingBuilder skirtBuilder) {
         Skirt skirt;
-        SkirtBuilder skirtBuilder = new SkirtBuilder();
-        skirt = skirtBuilder.addId().build();
+        skirt = (Skirt) skirtBuilder.addId().build();
+        process(skirt, skirtBuilder, orderManager);
+    }
+    public SkirtBuilder addWaistline(double waistline) {
+        skirt.setWaistline(waistline);
+        return this;
+    }
+    public SkirtBuilder addPattern(String pattern) {
+        skirt.setPattern(pattern);
+        return this;
+    }
 
-        chooseMaterial(skirt, skirtBuilder);
-        chooseColor(skirt, skirtBuilder);
-        chooseSize(skirt, skirtBuilder);
-        confirmItem(skirt, order);
 
+    @Override
+    public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
+        if (builder instanceof SkirtBuilder) {
+            chooseMaterial(item, builder);
+            chooseColor(item, builder);
+            chooseSize(item, builder);
+            chooseWaistline(item, builder);
+            choosePattern(item, builder);
+            placeOrder(item, orderManager);
+            item.setPrice(80);
+        }
+        return item;
+    }
+
+    private void choosePattern(Clothing item, ClothingBuilder builder) {
+        System.out.println(patternPrompt);
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1 -> item = addPattern("Short").build();
+            case 2 -> item = addPattern("Standard").build();
+            case 3 -> item = addPattern("Long").build();
+        }
+    }
+
+    private void chooseWaistline(Clothing item, ClothingBuilder builder) {
+        System.out.println(waistlinePrompt);
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1 -> item = addWaistline(80).build();
+            case 2 -> item = addWaistline(100).build();
+            case 3 -> item = addWaistline(120).build();
+        }
     }
 }

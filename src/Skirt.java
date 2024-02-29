@@ -36,6 +36,8 @@ public class Skirt extends Clothing {
                 "id: " + getId()+
                 ", material: " + getMaterial() +
                 ", color: " + getColor() +
-                ", size: " + getSize();
+                ", size: " + getSize() +
+                ", waistline: " + getWaistline() +
+                ", pattern: " + getPattern();
     }
 }

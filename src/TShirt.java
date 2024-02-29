@@ -38,6 +38,8 @@ public class TShirt extends Clothing {
                 "id: " + getId() +
                 ", material: " + getMaterial() +
                 ", color: " + getColor() +
-                ", size: " + getSize();
+                ", size: " + getSize() +
+                ", neck: " + getNeck() +
+                ", sleeves: " + getSleeves();
     }
 }

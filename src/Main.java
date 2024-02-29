@@ -3,6 +3,6 @@ public class Main {
         Menu menu = new Menu();
 
         menu.startProgram();
-        System.out.println(OrderManager.getInstance().getOrder());
+
     }
 }
