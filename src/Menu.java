@@ -17,7 +17,9 @@ public class Menu {
             "1. Pants\n" +
             "2. Skirt\n" +
             "3. T-Shirt\n\n" +
-            "4. Exit Shop\n" +
+            "4. Show Cart\n" +
+            "5. Place Order\n\n" +
+            "6. Exit Shop\n\n" +
             "Enter Choice: ";
 
     public void startProgram() {
@@ -35,7 +37,9 @@ public class Menu {
                 case 1 -> pantsBuilder.buildClothing(orderManager, pantsBuilder);
                 case 2 -> skirtBuilder.buildClothing(orderManager, skirtBuilder);
                 case 3 -> tShirtBuilder.buildClothing(orderManager, tShirtBuilder);
-                case 4 -> running = false;
+                case 4 -> orderManager.orderToString(orderManager.getOrder());
+                case 5 -> orderManager.addOrderWithoutItem();
+                case 6 -> running = false;
                 default -> System.out.println("Ogiltigt val. Försök igen.");
             }
         }

@@ -25,6 +25,10 @@ public class OrderManager {
         notifyCEOPlacedOrder();
     }
 
+    public void addOrderWithoutItem() {
+        System.out.println("Thanks for ordering, your order is being handled! You will get an email when order is processed with your receipt.\n");
+        notifyCEOPlacedOrder();
+    }
     public void addItemToOrder(Object item) {
         order.add(item);
     }
@@ -83,6 +87,14 @@ public class OrderManager {
         System.out.printf("TOTAL\t\t\t$%.2f\n", total);
         System.out.println("=====================================");
         System.out.println();
+        System.out.println();
+    }
+    public void orderToString(List<Object> order) {
+        System.out.println("Shopping Cart");
+        System.out.println("Items: " + (order.size() - 1));
+        for (Object item : order) {
+            System.out.print(item.toString());
+        }
         System.out.println();
     }
 

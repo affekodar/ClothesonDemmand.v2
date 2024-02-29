@@ -24,14 +24,14 @@ public abstract class ClothingBuilder extends Menu implements ClothingDecorating
             "3. No, exit shop\n";
 
 
-    public void orderToString(List<Object> order) {
-        System.out.println("Shopping Cart");
-        System.out.println("Items: " + (order.size() - 1));
-        for (Object item : order) {
-            System.out.print(item.toString());
-        }
-        System.out.println();
-    }
+//    public void orderToString(List<Object> order) {
+//        System.out.println("Shopping Cart");
+//        System.out.println("Items: " + (order.size() - 1));
+//        for (Object item : order) {
+//            System.out.print(item.toString());
+//        }
+//        System.out.println();
+//    }
 
     public void chooseMaterial(Clothing item, ClothingBuilder builder) {
         System.out.println(materialMenuPrompt);
@@ -72,6 +72,7 @@ public abstract class ClothingBuilder extends Menu implements ClothingDecorating
         switch (choice) {
             case 1 -> {
                 orderManager.addOrder(item);
+                System.out.println("Thanks for ordering, your order is being handled! You will get an email when order is processed with your receipt.");
             }
             case 2 -> orderManager.addItemToOrder(item);
             case 3 -> {
