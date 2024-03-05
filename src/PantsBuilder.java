@@ -78,6 +78,7 @@ public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingC
         PantsBuilder pantsBuilder = new PantsBuilder();
         pants = pantsBuilder.addId().build();
         orderManager.notifyCEOItemStarted(pants);
+        process(pants, pantsBuilder, orderManager);
     }
 
 

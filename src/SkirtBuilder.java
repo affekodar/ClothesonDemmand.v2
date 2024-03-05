@@ -67,6 +67,7 @@ public class SkirtBuilder extends ClothingBuilder {
         SkirtBuilder skirtBuilder = new SkirtBuilder();
         skirt = skirtBuilder.addId().build();
         orderManager.notifyCEOItemStarted(skirt);
+        process(skirt, skirtBuilder, orderManager);
     }
 
     public SkirtBuilder addWaistline(double waistline) {
