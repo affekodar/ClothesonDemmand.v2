@@ -5,13 +5,14 @@ public class TShirt extends Clothing {
     private int id;
     private static int nextId = 1;
 
+    public TShirt() {
+    }
 
     @Override
     public void setId() {
         this.id = nextId++;
     }
 
-    public TShirt(){}
 
     public double getSleeves() {
         return sleeves;
@@ -28,10 +29,13 @@ public class TShirt extends Clothing {
     public void setNeck(double neck) {
         this.neck = neck;
     }
+
     @Override
     public int getId() {
         return id;
     }
+
+
     @Override
     public String toString() {
         return "t-shirt_" +

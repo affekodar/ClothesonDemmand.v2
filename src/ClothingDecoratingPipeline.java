@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class ClothingDecoratingPipeline {
-    private ArrayList<ClothingDecoratingCommand> pipeline = new ArrayList<>();
+    private final ArrayList<ClothingDecoratingCommand> pipeline = new ArrayList<>();
 
     public void addCommand(ClothingDecoratingCommand command) {
         pipeline.add(command);

@@ -1,3 +1,3 @@
 public interface ClothingDecoratingCommand {
-    public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager);
+    Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager);
 }

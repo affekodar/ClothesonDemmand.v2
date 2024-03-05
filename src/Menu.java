@@ -12,15 +12,22 @@ public class Menu {
 
     private boolean running = true;
 
-    private static final String mainMenuPrompt = "\nMain Menu\n\n" +
-            "Which item would you like to customize?\n\n" +
-            "1. Pants\n" +
-            "2. Skirt\n" +
-            "3. T-Shirt\n\n" +
-            "4. Show Cart\n" +
-            "5. Place Order\n\n" +
-            "6. Exit Shop\n\n" +
-            "Enter Choice: ";
+    private static final String mainMenuPrompt = """
+
+            Main Menu
+
+            Which item would you like to customize?
+
+            1. Pants
+            2. Skirt
+            3. T-Shirt
+
+            4. Show Cart
+            5. Place Order
+
+            6. Exit Shop
+
+            Enter Choice:\s""";
 
     public void startProgram() {
         addCustomerDetails();
@@ -34,9 +41,9 @@ public class Menu {
             System.out.println(mainMenuPrompt);
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> pantsBuilder.buildClothing(orderManager, pantsBuilder);
-                case 2 -> skirtBuilder.buildClothing(orderManager, skirtBuilder);
-                case 3 -> tShirtBuilder.buildClothing(orderManager, tShirtBuilder);
+                case 1 -> pantsBuilder.buildClothing(orderManager);
+                case 2 -> skirtBuilder.buildClothing(orderManager);
+                case 3 -> tShirtBuilder.buildClothing(orderManager);
                 case 4 -> orderManager.orderToString(orderManager.getOrder());
                 case 5 -> orderManager.addOrderWithoutItem();
                 case 6 -> running = false;

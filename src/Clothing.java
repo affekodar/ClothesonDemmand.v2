@@ -11,7 +11,7 @@ public abstract class Clothing extends BusinessObject {
     //abstrakta metoder
     public abstract void setId();
 
-    //
+
     public String getMaterial() {
         return material;
     }

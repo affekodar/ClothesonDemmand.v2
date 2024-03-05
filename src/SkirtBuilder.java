@@ -3,16 +3,22 @@ import java.util.Scanner;
 public class SkirtBuilder extends ClothingBuilder {
     private final Skirt skirt = new Skirt();
     Scanner scanner = new Scanner(System.in);
-    private final static String patternPrompt = "Choose Pattern\n\n" +
-            "1. Short\n" +
-            "2. Standard\n" +
-            "3. Long\n\n" +
-            "Enter choice: ";
-    private final static String waistlinePrompt = "Choose Waistline\n\n" +
-            "1. 80 cm\n" +
-            "2. 100 cm\n" +
-            "3. 120 cm\n\n" +
-            "Enter choice: ";
+    private final static String patternPrompt = """
+            Choose Pattern
+
+            1. Short
+            2. Standard
+            3. Long
+
+            Enter choice:\s""";
+    private final static String waistlinePrompt = """
+            Choose Waistline
+
+            1. 80 cm
+            2. 100 cm
+            3. 120 cm
+
+            Enter choice:\s""";
 
     @Override
     public SkirtBuilder addMaterial(String material) {
@@ -56,10 +62,24 @@ public class SkirtBuilder extends ClothingBuilder {
     }
 
     @Override
-    public void buildClothing(OrderManager orderManager, ClothingBuilder skirtBuilder) {
+    public void buildClothing(OrderManager orderManager) {
         Skirt skirt;
-        skirt = (Skirt) skirtBuilder.addId().build();
-        process(skirt, skirtBuilder, orderManager);
+        SkirtBuilder skirtBuilder = new SkirtBuilder();
+        skirt = skirtBuilder.addId().build();
+        orderManager.notifyCEOItemStarted(skirt);
+
+//        process(skirt, skirtBuilder, orderManager);
+            chooseMaterial(skirtBuilder);
+            chooseColor(skirtBuilder);
+            chooseSize(skirtBuilder);
+            chooseWaistline(skirtBuilder);
+            choosePattern(skirtBuilder);
+            skirt.setPrice(80);
+            placeOrder(skirt, orderManager);
+
+
+
+
     }
 
     public SkirtBuilder addWaistline(double waistline) {
@@ -76,34 +96,34 @@ public class SkirtBuilder extends ClothingBuilder {
     @Override
     public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
         if (builder instanceof SkirtBuilder) {
-            chooseMaterial(item, builder);
-            chooseColor(item, builder);
-            chooseSize(item, builder);
-            chooseWaistline(item, builder);
-            choosePattern(item, builder);
+            chooseMaterial(builder);
+            chooseColor(builder);
+            chooseSize(builder);
+            chooseWaistline((SkirtBuilder) builder);
+            choosePattern((SkirtBuilder) builder);
             item.setPrice(80);
             placeOrder(item, orderManager);
         }
         return item;
     }
 
-    private void choosePattern(Clothing item, ClothingBuilder builder) {
+    private void choosePattern(SkirtBuilder builder) {
         System.out.println(patternPrompt);
         int choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> item = addPattern("Short").build();
-            case 2 -> item = addPattern("Standard").build();
-            case 3 -> item = addPattern("Long").build();
+            case 1 -> builder.addPattern("Short").build();
+            case 2 -> builder.addPattern("Standard").build();
+            case 3 -> builder.addPattern("Long").build();
         }
     }
 
-    private void chooseWaistline(Clothing item, ClothingBuilder builder) {
+    private void chooseWaistline(SkirtBuilder builder) {
         System.out.println(waistlinePrompt);
         int choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> item = addWaistline(80).build();
-            case 2 -> item = addWaistline(100).build();
-            case 3 -> item = addWaistline(120).build();
+            case 1 -> builder.addWaistline(80).build();
+            case 2 -> builder.addWaistline(100).build();
+            case 3 -> builder.addWaistline(120).build();
         }
     }
 }

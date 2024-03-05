@@ -1,65 +1,73 @@
-import java.util.List;
 import java.util.Scanner;
 
 public abstract class ClothingBuilder extends Menu implements ClothingDecoratingCommand {
 
     private final static Scanner scanner = new Scanner(System.in);
 
-    private final static String materialMenuPrompt = "\nMaterial\n\nChoose Material\n" +
-            "1. Cotton\n" +
-            "2. Linnen\n\n" +
-            "Enter choice: ";
-    private final static String colorMenuPrompt = "\nColor\n\nChoose Color\n" +
-            "1. Blue\n" +
-            "2. Yellow\n\n" +
-            "Enter choice: ";
-    private final static String sizeMenuPrompt = "\nSize\n\nChoose Size\n" +
-            "1. Small\n" +
-            "2. Large\n\n" +
-            "Enter choice:";
+    private final static String materialMenuPrompt = """
 
-    private final static String placeOrderPrompt = "\nDo you want to place order?\n" +
-            "1. Yes\n" +
-            "2. No, add item and continue shopping\n" +
-            "3. No, exit shop\n";
+            Material
+
+            Choose Material
+            1. Cotton
+            2. Linnen
+
+            Enter choice:\s""";
+    private final static String colorMenuPrompt = """
+
+            Color
+
+            Choose Color
+            1. Blue
+            2. Yellow
+
+            Enter choice:\s""";
+    private final static String sizeMenuPrompt = """
+
+            Size
+
+            Choose Size
+            1. Small
+            2. Large
+
+            Enter choice:""";
+
+    private final static String placeOrderPrompt = """
+
+            Do you want to place order?
+            1. Yes
+            2. No, add item and continue shopping
+            3. No, exit shop
+            """;
 
 
-//    public void orderToString(List<Object> order) {
-//        System.out.println("Shopping Cart");
-//        System.out.println("Items: " + (order.size() - 1));
-//        for (Object item : order) {
-//            System.out.print(item.toString());
-//        }
-//        System.out.println();
-//    }
-
-    public void chooseMaterial(Clothing item, ClothingBuilder builder) {
+    public void chooseMaterial(ClothingBuilder builder) {
         System.out.println(materialMenuPrompt);
         int choice = scanner.nextInt();
 
         switch (choice) {
-            case 1 -> item = builder.addMaterial("Cotton").build();
-            case 2 -> item = builder.addMaterial("Linnen").build();
+            case 1 -> builder.addMaterial("Cotton").build();
+            case 2 -> builder.addMaterial("Linnen").build();
         }
     }
 
-    public void chooseColor(Clothing item, ClothingBuilder builder) {
+    public void chooseColor(ClothingBuilder builder) {
         System.out.println(sizeMenuPrompt);
         int choice = scanner.nextInt();
 
         switch (choice) {
-            case 1 -> item = builder.addSize("Small").build();
-            case 2 -> item = builder.addSize("Large").build();
+            case 1 -> builder.addSize("Small").build();
+            case 2 -> builder.addSize("Large").build();
         }
     }
 
-    public void chooseSize(Clothing item, ClothingBuilder builder) {
+    public void chooseSize(ClothingBuilder builder) {
         System.out.println(colorMenuPrompt);
         int choice = scanner.nextInt();
 
         switch (choice) {
-            case 1 -> item = builder.addColor("Blue").build();
-            case 2 -> item = builder.addColor("Yellow").build();
+            case 1 -> builder.addColor("Blue").build();
+            case 2 -> builder.addColor("Yellow").build();
 
         }
     }
@@ -97,8 +105,8 @@ public abstract class ClothingBuilder extends Menu implements ClothingDecorating
 
     public abstract Clothing build();
 
-    public abstract void buildClothing(OrderManager orderManager, ClothingBuilder builder);
+    public abstract void buildClothing(OrderManager orderManager);
 
 
-    public abstract Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager);
+//    public abstract Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager);
 }

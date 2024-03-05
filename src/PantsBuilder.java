@@ -3,16 +3,22 @@ import java.util.Scanner;
 public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingCommand {
     private final Pants pants = new Pants();
     Scanner scanner = new Scanner(System.in);
-    private final static String fitPrompt = "Choose Fit\n\n" +
-            "1. Tight\n" +
-            "2. Standard\n" +
-            "3. Loose\n\n" +
-            "Enter choice: ";
-    private final static String lengthPrompt = "Choose Length\n\n" +
-            "1. 100\n" +
-            "2. 120\n" +
-            "3. 140\n\n" +
-            "Enter choice: ";
+    private final static String fitPrompt = """
+            Choose Fit
+
+            1. Tight
+            2. Standard
+            3. Loose
+
+            Enter choice:\s""";
+    private final static String lengthPrompt = """
+            Choose Length
+
+            1. 100
+            2. 120
+            3. 140
+
+            Enter choice:\s""";
 
 
     public PantsBuilder addFit(String fit) {
@@ -67,44 +73,54 @@ public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingC
     }
 
     @Override
-    public void buildClothing(OrderManager orderManager, ClothingBuilder pantsBuilder) {
+    public void buildClothing(OrderManager orderManager) {
         Pants pants;
-        pants = (Pants) pantsBuilder.addId().build();
-        process(pants, pantsBuilder, orderManager);
+        PantsBuilder pantsBuilder = new PantsBuilder();
+        pants = pantsBuilder.addId().build();
+        orderManager.notifyCEOItemStarted(pants);
+//        process(pants, pantsBuilder, orderManager);
+        chooseMaterial(pantsBuilder);
+        chooseColor(pantsBuilder);
+        chooseSize(pantsBuilder);
+        chooseFit(pantsBuilder);
+        chooseLength(pantsBuilder);
+        pants.setPrice(100);
+        placeOrder(pants, orderManager);
+
     }
 
 
     @Override
     public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
         if (builder instanceof PantsBuilder) {
-            chooseMaterial(item, builder);
-            chooseColor(item, builder);
-            chooseSize(item, builder);
-            chooseFit(item, builder);
-            chooseLength(item, builder);
+            chooseMaterial(builder);
+            chooseColor(builder);
+            chooseSize(builder);
+            chooseFit((PantsBuilder) builder);
+            chooseLength((PantsBuilder) builder);
             item.setPrice(100);
             placeOrder(item, orderManager);
         }
         return item;
     }
 
-    private void chooseFit(Clothing item, ClothingBuilder builder) {
+    private void chooseFit(PantsBuilder builder) {
         System.out.println(fitPrompt);
         int choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> item = addFit("Tight").build();
-            case 2 -> item = addFit("Standard").build();
-            case 3 -> item = addFit("Loose").build();
+            case 1 -> builder.addFit("Tight").build();
+            case 2 -> builder.addFit("Standard").build();
+            case 3 -> builder.addFit("Loose").build();
         }
     }
 
-    private void chooseLength(Clothing item, ClothingBuilder builder) {
+    private void chooseLength(PantsBuilder builder) {
         System.out.println(lengthPrompt);
         int choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> item = addLength(100).build();
-            case 2 -> item = addLength(120).build();
-            case 3 -> item = addLength(140).build();
+            case 1 -> builder.addLength(100).build();
+            case 2 -> builder.addLength(120).build();
+            case 3 -> builder.addLength(140).build();
         }
     }
 }

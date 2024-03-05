@@ -4,7 +4,7 @@ import java.util.List;
 public class OrderManager {
     private static OrderManager instance;
     private final List<OrderObserver> observers;
-    private final List<Object> order;
+    private final List<BusinessObject> order;
 
 
     private OrderManager() {
@@ -19,7 +19,7 @@ public class OrderManager {
         return instance;
     }
 
-    public void addOrder(Object item) {
+    public void addOrder(BusinessObject item) {
         order.add(item);
         System.out.println("Thanks for ordering, your order is being handled! You will get an email when order is processed with your receipt.\n");
         notifyCEOPlacedOrder();
@@ -29,9 +29,11 @@ public class OrderManager {
         System.out.println("Thanks for ordering, your order is being handled! You will get an email when order is processed with your receipt.\n");
         notifyCEOPlacedOrder();
     }
-    public void addItemToOrder(Object item) {
+
+    public void addItemToOrder(BusinessObject item) {
         order.add(item);
     }
+
 
     public void simulateOrderFinished() {
         notifyCEOFinishedOrder();
@@ -43,9 +45,6 @@ public class OrderManager {
         observers.add(observer);
     }
 
-    public void removeObserver(OrderObserver observer) {
-        observers.remove(observer);
-    }
 
     private void notifyCEOPlacedOrder() {
 
@@ -64,10 +63,17 @@ public class OrderManager {
         System.out.println();
     }
 
+    public void notifyCEOItemStarted(Clothing item) {
+        System.out.println();
+        for (OrderObserver observer : observers) {
+            observer.itemStarted(item);
+        }
+    }
+
     public void printReceipt() {
         System.out.println("============== RECEIPT ==============");
         if (order.get(0) instanceof Customer) {
-            System.out.println("customer_id: " + ((Customer) order.get(0)).getId() + " Name:" + ((Customer) order.get(0)).getName());
+            System.out.println("customer_id: " + ((Customer) order.get(0)).getId() + " Name:" + (order.get(0)).getName());
         }
         System.out.println("Items " + (order.size() - 1) + "\t\t\tPrice");
         System.out.println("-------------------------------------");
@@ -89,7 +95,8 @@ public class OrderManager {
         System.out.println();
         System.out.println();
     }
-    public void orderToString(List<Object> order) {
+
+    public void orderToString(List<BusinessObject> order) {
         System.out.println("Shopping Cart");
         System.out.println("Items: " + (order.size() - 1));
         for (Object item : order) {
@@ -98,7 +105,7 @@ public class OrderManager {
         System.out.println();
     }
 
-    public List<Object> getOrder() {
+    public List<BusinessObject> getOrder() {
         return order;
     }
 }

@@ -1,7 +1,9 @@
 import java.util.List;
 
 public interface OrderObserver {
-    void orderAdded(List<Object> order);
+    void itemStarted(Clothing item);
 
-    void orderFinished(List<Object> order);
+    void orderAdded(List<BusinessObject> order);
+
+    void orderFinished(List<BusinessObject> order);
 }

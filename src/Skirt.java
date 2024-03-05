@@ -14,7 +14,8 @@ public class Skirt extends Clothing {
         return id;
     }
 
-    public Skirt(){}
+    public Skirt() {
+    }
 
     public double getWaistline() {
         return waistline;
@@ -31,9 +32,10 @@ public class Skirt extends Clothing {
     public void setPattern(String pattern) {
         this.pattern = pattern;
     }
+
     public String toString() {
         return "skirt_" +
-                "id: " + getId()+
+                "id: " + getId() +
                 ", material: " + getMaterial() +
                 ", color: " + getColor() +
                 ", size: " + getSize() +
