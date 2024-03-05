@@ -67,19 +67,6 @@ public class SkirtBuilder extends ClothingBuilder {
         SkirtBuilder skirtBuilder = new SkirtBuilder();
         skirt = skirtBuilder.addId().build();
         orderManager.notifyCEOItemStarted(skirt);
-
-//        process(skirt, skirtBuilder, orderManager);
-            chooseMaterial(skirtBuilder);
-            chooseColor(skirtBuilder);
-            chooseSize(skirtBuilder);
-            chooseWaistline(skirtBuilder);
-            choosePattern(skirtBuilder);
-            skirt.setPrice(80);
-            placeOrder(skirt, orderManager);
-
-
-
-
     }
 
     public SkirtBuilder addWaistline(double waistline) {
