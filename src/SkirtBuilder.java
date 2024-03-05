@@ -62,12 +62,12 @@ public class SkirtBuilder extends ClothingBuilder {
     }
 
     @Override
-    public void buildClothing(OrderManager orderManager) {
+    public Clothing buildClothing(OrderManager orderManager) {
         Skirt skirt;
         SkirtBuilder skirtBuilder = new SkirtBuilder();
         skirt = skirtBuilder.addId().build();
         orderManager.notifyCEOItemStarted(skirt);
-        process(skirt, skirtBuilder, orderManager);
+        return skirt;
     }
 
     public SkirtBuilder addWaistline(double waistline) {
@@ -82,7 +82,7 @@ public class SkirtBuilder extends ClothingBuilder {
 
 
     @Override
-    public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
+    public void process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
         if (builder instanceof SkirtBuilder) {
             chooseMaterial(builder);
             chooseColor(builder);
@@ -92,7 +92,6 @@ public class SkirtBuilder extends ClothingBuilder {
             item.setPrice(80);
             placeOrder(item, orderManager);
         }
-        return item;
     }
 
     private void choosePattern(SkirtBuilder builder) {

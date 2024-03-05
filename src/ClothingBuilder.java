@@ -105,8 +105,8 @@ public abstract class ClothingBuilder extends Menu implements ClothingDecorating
 
     public abstract Clothing build();
 
-    public abstract void buildClothing(OrderManager orderManager);
+    public abstract Clothing buildClothing(OrderManager orderManager);
 
 
-    public abstract Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager);
+    public abstract void process(Clothing item, ClothingBuilder builder, OrderManager orderManager);
 }

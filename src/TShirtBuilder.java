@@ -72,16 +72,16 @@ public class TShirtBuilder extends ClothingBuilder {
     }
 
     @Override
-    public void buildClothing(OrderManager orderManager) {
+    public Clothing buildClothing(OrderManager orderManager) {
         TShirt tShirt;
         TShirtBuilder tShirtBuilder = new TShirtBuilder();
         tShirt = tShirtBuilder.addId().build();
         orderManager.notifyCEOItemStarted(tShirt);
-        process(tShirt, tShirtBuilder, orderManager);
+        return tShirt;
     }
 
     @Override
-    public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
+    public void process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
         if (builder instanceof TShirtBuilder) {
             chooseMaterial(builder);
             chooseColor(builder);
@@ -91,7 +91,6 @@ public class TShirtBuilder extends ClothingBuilder {
             item.setPrice(50);
             placeOrder(item, orderManager);
         }
-        return item;
     }
 
     private void chooseSleeves(TShirtBuilder builder) {

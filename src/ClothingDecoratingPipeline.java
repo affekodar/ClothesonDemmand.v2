@@ -6,11 +6,9 @@ public class ClothingDecoratingPipeline {
     public void addCommand(ClothingDecoratingCommand command) {
         pipeline.add(command);
     }
-    public Clothing execute(Clothing item, ClothingBuilder builder ,OrderManager orderManager) {
-        Clothing result = item;
+    public void execute(Clothing item, ClothingBuilder builder , OrderManager orderManager) {
         for (ClothingDecoratingCommand command : pipeline) {
-            result = command.process(result, builder, orderManager);
+            command.process(item, builder, orderManager);
         }
-        return result;
     }
 }

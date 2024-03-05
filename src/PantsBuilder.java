@@ -73,17 +73,17 @@ public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingC
     }
 
     @Override
-    public void buildClothing(OrderManager orderManager) {
+    public Clothing buildClothing(OrderManager orderManager) {
         Pants pants;
         PantsBuilder pantsBuilder = new PantsBuilder();
         pants = pantsBuilder.addId().build();
         orderManager.notifyCEOItemStarted(pants);
-        process(pants, pantsBuilder, orderManager);
+        return pants;
     }
 
 
     @Override
-    public Clothing process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
+    public void process(Clothing item, ClothingBuilder builder, OrderManager orderManager) {
         if (builder instanceof PantsBuilder) {
             chooseMaterial(builder);
             chooseColor(builder);
@@ -93,7 +93,6 @@ public class PantsBuilder extends ClothingBuilder implements ClothingDecoratingC
             item.setPrice(100);
             placeOrder(item, orderManager);
         }
-        return item;
     }
 
     private void chooseFit(PantsBuilder builder) {
