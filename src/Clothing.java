@@ -1,5 +1,5 @@
 public abstract class Clothing extends BusinessObject {
-    // Gemensamma attribut och metoder för alla klädesplagg
+
     private String material;
     private String color;
     private String size;
@@ -8,7 +8,6 @@ public abstract class Clothing extends BusinessObject {
     public Clothing() {
     }
 
-    //abstrakta metoder
     public abstract void setId();
 
 

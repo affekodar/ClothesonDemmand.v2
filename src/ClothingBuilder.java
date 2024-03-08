@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
-public abstract class ClothingBuilder extends Menu implements ClothingDecoratingCommand {
+public abstract class ClothingBuilder extends Menu {
 
     private final static Scanner scanner = new Scanner(System.in);
+
 
     private final static String materialMenuPrompt = """
 
@@ -68,21 +69,31 @@ public abstract class ClothingBuilder extends Menu implements ClothingDecorating
         switch (choice) {
             case 1 -> builder.addColor("Blue").build();
             case 2 -> builder.addColor("Yellow").build();
-
         }
+
+
+    }
+
+    public void commandProcess(Clothing item) {
+        ClothingDecoratingPipeline clothingDecoratingPipeline = new ClothingDecoratingPipeline();
+        clothingDecoratingPipeline.addCommand(new SewCommand());
+        clothingDecoratingPipeline.addCommand(new CutCommand());
+
+        clothingDecoratingPipeline.execute(item);
+
     }
 
 
-    public void placeOrder(Clothing item, OrderManager orderManager) {
+    public void placeOrder(ClothingBuilder builder, OrderManager orderManager) {
         System.out.println(placeOrderPrompt);
         int choice = scanner.nextInt();
 
         switch (choice) {
             case 1 -> {
-                orderManager.addOrder(item);
+                orderManager.addOrder(builder.build());
                 System.out.println("Thanks for ordering, your order is being handled! You will get an email when order is processed with your receipt.");
             }
-            case 2 -> orderManager.addItemToOrder(item);
+            case 2 -> orderManager.addItemToOrder(builder.build());
             case 3 -> {
                 System.out.println("You're exiting the shop, we hope to see you again!");
                 System.exit(0);
@@ -105,8 +116,8 @@ public abstract class ClothingBuilder extends Menu implements ClothingDecorating
 
     public abstract Clothing build();
 
-    public abstract Clothing buildClothing(OrderManager orderManager);
+    public abstract void buildClothing(OrderManager orderManager);
 
 
-    public abstract void process(Clothing item, ClothingBuilder builder, OrderManager orderManager);
+//    public abstract void process(ClothingBuilder builder);
 }

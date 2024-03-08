@@ -6,7 +6,6 @@ public class Menu {
     private static final SkirtBuilder skirtBuilder = new SkirtBuilder();
     private static final TShirtBuilder tShirtBuilder = new TShirtBuilder();
     private final OrderManager orderManager = OrderManager.getInstance();
-    private final ClothingDecoratingPipeline processingPipeline = new ClothingDecoratingPipeline();
 
     private final Customer customer = new Customer();
 
@@ -33,17 +32,15 @@ public class Menu {
         addCustomerDetails();
         CEO ceo = new CEO();
         orderManager.addObserver(ceo);
-        processingPipeline.addCommand(pantsBuilder);
-        processingPipeline.addCommand(skirtBuilder);
-        processingPipeline.addCommand(tShirtBuilder);
+
 
         while (running) {
             System.out.println(mainMenuPrompt);
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> processingPipeline.execute(pantsBuilder.buildClothing(orderManager), pantsBuilder, orderManager);
-                case 2 -> processingPipeline.execute(skirtBuilder.buildClothing(orderManager), skirtBuilder, orderManager);
-                case 3 -> processingPipeline.execute(tShirtBuilder.buildClothing(orderManager), tShirtBuilder, orderManager);
+                case 1 -> pantsBuilder.buildClothing(orderManager);
+                case 2 -> skirtBuilder.buildClothing(orderManager);
+                case 3 -> tShirtBuilder.buildClothing(orderManager);
                 case 4 -> orderManager.orderToString(orderManager.getOrder());
                 case 5 -> orderManager.addOrderWithoutItem();
                 case 6 -> running = false;

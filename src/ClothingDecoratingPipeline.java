@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
 public class ClothingDecoratingPipeline {
-    private final ArrayList<ClothingDecoratingCommand> pipeline = new ArrayList<>();
+    private final ArrayList<ClothingCommand> pipeline = new ArrayList<>();
 
-    public void addCommand(ClothingDecoratingCommand command) {
+    public void addCommand(ClothingCommand command) {
         pipeline.add(command);
     }
-    public void execute(Clothing item, ClothingBuilder builder , OrderManager orderManager) {
-        for (ClothingDecoratingCommand command : pipeline) {
-            command.process(item, builder, orderManager);
+
+    public void execute(Clothing item) {
+        Clothing result = item;
+        for (ClothingCommand command : pipeline) {
+            result = command.process(result);
         }
     }
 }
